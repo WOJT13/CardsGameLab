@@ -11,12 +11,12 @@ public class GridManager : MonoBehaviour
     /// Column length of grid
     /// </summary>
     [SerializeField]
-    private int columnLength;
+    public int columnLength;
     /// <summary>
     /// Row length of grid
     /// </summary>
-    [SerializeField]
-    private int rowLength;
+    //[SerializeField]
+    public int rowLength;
 
     /// <summary>
     /// Space between parts of grid

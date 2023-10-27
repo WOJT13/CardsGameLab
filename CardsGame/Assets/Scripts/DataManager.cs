@@ -19,6 +19,11 @@ public class DataManager : MonoBehaviour
     /// </summary>
     public CardsList cardList = null;
 
+    /// <summary>
+    /// List of coordinates
+    /// </summary>
+    public CoordinatesList coordinatesList = new CoordinatesList();
+
 
     private void Awake()
     {
