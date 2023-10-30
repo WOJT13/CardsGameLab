@@ -9,20 +9,11 @@ public class DataManager : MonoBehaviour
     /// Get and set instance of data manager
     /// </summary>
     public static DataManager Instance { get; private set; }
-
-    /// <summary>
-    /// Card object
-    /// </summary>
-    public Card card = null;
-    /// <summary>
-    /// List of cards object
-    /// </summary>
-    public CardsList cardList = null;
-
-    /// <summary>
-    /// List of coordinates
-    /// </summary>
-    public CoordinatesList coordinatesList = new CoordinatesList();
+    
+    public string nickName;
+    public DifficultyLevelsList difficultyLevelsList = null;
+    public DifficultyLevel difficultyLevel = null;
+    public bool IsWin = false;
 
 
     private void Awake()

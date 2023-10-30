@@ -19,21 +19,64 @@ public class CardManager : MonoBehaviour
     /// <summary>
     /// Method added card to list of cards
     /// </summary>
-    void Start()
+    void Awake()
     {
+        
         Card KingCard = new Card
         {
             cardID = 1,
             symbolCard = symbol.Pik,
             pictographCard = pictograph.Krol,
-            parametersList = new List<Parameters>()
+            parametersList = new List<Parameters>(){ new Parameters() { category = "ParametrA", points = 6 }, new Parameters() { category = "ParametrB", points = 5 }},
+            buildingModel = building
             
         };
-        KingCard.parametersList.Add(new Parameters() { category = "a", points = 2 });
-        KingCard.buildingModel = building;
+        Card AsCard = new Card
+        {
+            cardID = 1,
+            symbolCard = symbol.Kier,
+            pictographCard = pictograph.As,
+            parametersList = new List<Parameters>(){ new Parameters() { category = "ParametrB", points = 4 }},
+            buildingModel = building
+            
+        };
+
+        Card N9Card = new Card
+        {
+            cardID = 1,
+            symbolCard = symbol.Karo,
+            pictographCard = pictograph.n9,
+            parametersList = new List<Parameters>(){ new Parameters() { category = "ParametrB", points = 7 }},
+            buildingModel = building
+            
+        };
+
+        Card N3Card = new Card
+        {
+            cardID = 1,
+            symbolCard = symbol.Trefl,
+            pictographCard = pictograph.n3,
+            parametersList = new List<Parameters>(){ new Parameters() { category = "ParametrA", points = 3 }},
+            buildingModel = building
+            
+        };
+
+        Card N2Card = new Card
+        {
+            cardID = 1,
+            symbolCard = symbol.Pik,
+            pictographCard = pictograph.n2,
+            parametersList = new List<Parameters>(){ new Parameters() { category = "ParametrA", points = 2 }},
+            buildingModel = building
+            
+        };
+
         cardsList.Create(KingCard);
-        DataManager.Instance.cardList = cardsList;
-        Debug.Log(DataManager.Instance.cardList == null) ;
+        cardsList.Create(AsCard);
+        cardsList.Create(N9Card);
+        cardsList.Create(N3Card);
+        cardsList.Create(N2Card);
+        GameBoardController.Instance.cardList = cardsList;
     }
 
 }

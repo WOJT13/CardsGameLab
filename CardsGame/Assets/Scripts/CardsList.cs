@@ -69,14 +69,4 @@ public class CardsList
             cardsList.Remove(cardToDelete); 
         }
     }
-    /// <summary>
-    /// Method allows to place model of building for element
-    /// </summary>
-    /// <param name="building_x"></param>
-    /// <param name="buiding_z"></param>
-    /// <param name="index"></param>
-    public void BuildBuilding(int building_x, int buiding_z, int index)
-    {
-        cardsList[index].PlacementBuilding(building_x, buiding_z);
-    }
 }
