@@ -27,7 +27,7 @@ public class HudManager : MonoBehaviour
 
     private void OnToggleValueChanged(bool value)
     {
-        if (value == true && GameBoardController.Instance.bombsLeft > 0)
+        if (value == true)
             GameBoardController.Instance.canDestroy = true;
         else
             GameBoardController.Instance.canDestroy = false;
