@@ -22,6 +22,9 @@ public class GameBoardController : MonoBehaviour
     /// </summary>
     public CoordinatesList coordinatesList = new CoordinatesList();
 
+    public bool canDestroy = false;
+    public int bombsLeft;
+
 
     private void Awake()
     {

@@ -18,7 +18,6 @@ public class CoordinatesList
     /// <param name="coordinates"></param>
     public void AddToList(Vector2Int coordinates)
     {
-        Debug.Log("WOjt");
         coordinatesList.Add(coordinates);
     }
 
@@ -47,5 +46,10 @@ public class CoordinatesList
     public int Count()
     {
         return coordinatesList.Count;
+    }
+
+    public void RemoveFromList(Vector2Int coordinates)
+    {
+        coordinatesList.Remove(coordinates);
     }
 }

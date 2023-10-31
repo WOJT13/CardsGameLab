@@ -666,13 +666,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b84b957f08aa1db47ab44e069b9599fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  card: {fileID: 0}
   nickName: 
   difficultyLevel:
     name: 
     icon: {fileID: 0}
     parameters: []
     bombCount: 0
+  IsWin: 0
 --- !u!4 &626951169
 Transform:
   m_ObjectHideFlags: 0
