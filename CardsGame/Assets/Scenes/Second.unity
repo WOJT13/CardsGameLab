@@ -1106,6 +1106,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mainCamera: {fileID: 1878511720}
+  treeModelList:
+  - {fileID: 192044, guid: 19682540d8a014522a319b1cf788aee2, type: 3}
+  - {fileID: 191266, guid: c44bd9bdc114d4a60932c0087d9d1732, type: 3}
+  - {fileID: 137650, guid: 826b6a0b570e8460990010fa615b5a2a, type: 3}
 --- !u!114 &802070963
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2182,13 +2186,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1878511718}
-  m_LocalRotation: {x: 0.14749202, y: -0, z: -0, w: 0.9890633}
-  m_LocalPosition: {x: 0, y: 7.58, z: -15.66}
+  m_LocalRotation: {x: 0.21804716, y: -0, z: -0, w: 0.97593826}
+  m_LocalPosition: {x: 0, y: 11.61, z: -14.43}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 16.963001, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 25.189001, y: 0, z: 0}
 --- !u!114 &1878511722
 MonoBehaviour:
   m_ObjectHideFlags: 0

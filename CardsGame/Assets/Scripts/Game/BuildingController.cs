@@ -17,6 +17,8 @@ public class BuildingController : MonoBehaviour
     /// </summary>
     public Vector2Int coordinates = new Vector2Int();
 
+    public List<GameObject> treeModelList = new List<GameObject>();
+
     /// <summary>
     /// Called once per frame to check for interactions with the building.
     /// </summary>
@@ -64,6 +66,11 @@ public class BuildingController : MonoBehaviour
 
             // Destroy the building
             Destroy(gameObject);
+
+            foreach(var element in treeModelList)
+            {
+                Destroy(element);
+            }
         }
     }
 }
