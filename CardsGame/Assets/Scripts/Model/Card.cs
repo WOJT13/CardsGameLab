@@ -1,13 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-[System.Serializable]
+
 
 /// <summary>
 /// Enumeration representing playing card symbols (suits).
 /// </summary>
+[System.Serializable]
 public enum symbol
-{
+  {
     /// <summary>
     /// The suit of "Pik" (Spades).
     /// </summary>
@@ -27,13 +28,13 @@ public enum symbol
     /// The suit of "Karo" (Diamonds).
     /// </summary>
     Karo
-}
+  }
 
 /// <summary>
 /// Enumeration representing playing card pictographs (face values).
 /// </summary>
 public enum pictograph
-{
+  {
     /// <summary>
     /// The Ace card.
     /// </summary>
@@ -98,15 +99,14 @@ public enum pictograph
     /// The number 2 card.
     /// </summary>
     n2
-}
+  }
 
 /// <summary>
 /// Class represent card
 /// </summary>
 [System.Serializable]
-
 public class Card
-{
+  {
     /// <summary>
     /// ID of card
     /// </summary>
@@ -131,6 +131,14 @@ public class Card
     /// Model of building from card
     /// </summary>
     public GameObject buildingModel;
-}
 
+    /// <summary>
+    /// List of possible tree locations
+    /// </summary>
+    public List<Vector3> treeLocations;// Potential locations for trees
 
+    /// <summary>
+    /// List of possible fountain locations
+    /// </summary>
+    public List<Vector3> fountainLocations;// Potential locations for fountains
+  }

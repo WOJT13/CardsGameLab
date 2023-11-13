@@ -293,6 +293,8 @@ MonoBehaviour:
     pictographCard: 0
     parametersList: []
     buildingModel: {fileID: 0}
+    treeLocations: []
+    fountainLocations: []
   canDestroy: 0
   bombsLeft: 0
   canWalk: 0
@@ -1106,10 +1108,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mainCamera: {fileID: 1878511720}
-  treeModelList:
-  - {fileID: 192044, guid: 19682540d8a014522a319b1cf788aee2, type: 3}
+  treePrefabs:
   - {fileID: 191266, guid: c44bd9bdc114d4a60932c0087d9d1732, type: 3}
   - {fileID: 137650, guid: 826b6a0b570e8460990010fa615b5a2a, type: 3}
+  - {fileID: 192044, guid: 19682540d8a014522a319b1cf788aee2, type: 3}
+  fountainPrefab: {fileID: 178508, guid: 8142860b8f89a564faf152e3c8b743e7, type: 3}
 --- !u!114 &802070963
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 /// <summary>
 /// Controls a building in the game and handles interactions with it.
@@ -17,7 +18,8 @@ public class BuildingController : MonoBehaviour
     /// </summary>
     public Vector2Int coordinates = new Vector2Int();
 
-    public List<GameObject> treeModelList = new List<GameObject>();
+    [FormerlySerializedAs("cardPrefablList")]
+    public List<GameObject> cardObjectList = new List<GameObject>();
 
     /// <summary>
     /// Called once per frame to check for interactions with the building.
@@ -67,10 +69,11 @@ public class BuildingController : MonoBehaviour
             // Destroy the building
             Destroy(gameObject);
 
-            foreach(var element in treeModelList)
+            foreach(var element in cardObjectList)
             {
                 Destroy(element);
             }
+
         }
     }
 }
