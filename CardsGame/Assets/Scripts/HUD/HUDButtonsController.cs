@@ -47,10 +47,10 @@ public class HUDButtonsController : MonoBehaviour
     public void onDrawNextButtonClick()
     {
         // Generate random coordinates
-        Vector2Int coordinates = new Vector2Int();
+        Vector3 coordinates = new Vector3();
         coordinates.x = Random.Range(0, 2);
         coordinates.y = Random.Range(0, 2);
-
+        coordinates.z = 0f;
         // Check if the coordinates are available
         bool isOn = GameBoardController.Instance.coordinatesList.CheckList(coordinates);
 

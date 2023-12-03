@@ -16,6 +16,8 @@ public class CardManager : MonoBehaviour
     /// </summary>
     public GameObject building;
 
+    public Sprite cardImg;
+
     /// <summary>
     /// Method that adds card to list of cards
     /// </summary>
@@ -38,6 +40,7 @@ public class CardManager : MonoBehaviour
                 new Vector3(3, 0, 3)// Corner 4
             },
 
+            cardImage= cardImg,
         };
         Card AsCard = new Card{
             cardID = 1,
@@ -54,7 +57,7 @@ public class CardManager : MonoBehaviour
             fountainLocations = new List<Vector3>{
                 new Vector3(3, 0, 3)// Corner 4
             },
-
+            cardImage = cardImg,
         };
 
         Card N9Card = new Card{
@@ -72,7 +75,7 @@ public class CardManager : MonoBehaviour
             fountainLocations = new List<Vector3>{
                 new Vector3(3, 0, 3)// Corner 4
             },
-
+            cardImage= cardImg,
         };
 
         Card N3Card = new Card{
@@ -90,7 +93,7 @@ public class CardManager : MonoBehaviour
             fountainLocations = new List<Vector3>{
                 new Vector3(3, 0, 3)// Corner 4
             },
-
+            cardImage = cardImg,
         };
 
         Card N2Card = new Card{
@@ -108,7 +111,7 @@ public class CardManager : MonoBehaviour
             fountainLocations = new List<Vector3>{
                 new Vector3(3, 0, 3)// Corner 4
             },
-
+            cardImage= cardImg,
         };
 
         cardsList.Create(KingCard);
