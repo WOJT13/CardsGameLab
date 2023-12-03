@@ -16,7 +16,7 @@ public class BuildingController : MonoBehaviour
     /// <summary>
     /// The coordinates of the building on the game board.
     /// </summary>
-    public Vector2Int coordinates = new Vector2Int();
+    public Vector3 coordinates = new Vector3();
 
     [FormerlySerializedAs("cardPrefablList")]
     public List<GameObject> cardObjectList = new List<GameObject>();

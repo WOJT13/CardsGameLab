@@ -28,6 +28,11 @@ public class GameBoardController : MonoBehaviour
     public CoordinatesList coordinatesList = new CoordinatesList();
 
     /// <summary>
+    /// List of neighor coordinates of building models
+    /// </summary>
+    public CoordinatesList neigbborList = new CoordinatesList();
+    
+    /// <summary>
     /// Flag indicating whether the player can destroy buildings on the game board.
     /// </summary>
     public bool canDestroy = false;

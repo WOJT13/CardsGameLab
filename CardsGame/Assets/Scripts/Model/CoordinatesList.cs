@@ -10,13 +10,13 @@ public class CoordinatesList
     /// <summary>
     /// List of building placement points
     /// </summary>
-    public List<Vector2Int> coordinatesList = new List<Vector2Int>();
+    public List<Vector3> coordinatesList = new List<Vector3>();
 
     /// <summary>
     /// Method which add element to the list
     /// </summary>
     /// <param name="coordinates"></param>
-    public void AddToList(Vector2Int coordinates)
+    public void AddToList(Vector3 coordinates)
     {
         coordinatesList.Add(coordinates);
     }
@@ -26,10 +26,10 @@ public class CoordinatesList
     /// </summary>
     /// <param name="coordinates"></param>
     /// <returns>Information that element is in list or not</returns>
-    public bool CheckList(Vector2Int coordinates)
+    public bool CheckList(Vector3 coordinates)
     {
         bool OnList=false;
-        foreach(Vector2Int c in coordinatesList)
+        foreach(Vector3 c in coordinatesList)
         {
             if(coordinates == c)
             {
@@ -48,8 +48,21 @@ public class CoordinatesList
         return coordinatesList.Count;
     }
 
-    public void RemoveFromList(Vector2Int coordinates)
+    /// <summary>
+    /// Method which remove element from list
+    /// </summary>
+    /// <param name="coordinates"></param>
+    public void RemoveFromList(Vector3 coordinates)
     {
         coordinatesList.Remove(coordinates);
+    }
+
+    /// <summary>
+    /// Method returns first element in list 
+    /// </summary>
+    /// <returns>First element</returns>
+    public Vector3 GetFirstElement()
+    {
+        return coordinatesList[0];
     }
 }

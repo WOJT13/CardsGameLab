@@ -141,4 +141,6 @@ public class Card
     /// List of possible fountain locations
     /// </summary>
     public List<Vector3> fountainLocations;// Potential locations for fountains
+
+    public Sprite cardImage;
   }

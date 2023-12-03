@@ -69,4 +69,30 @@ public class CardsList
             cardsList.Remove(cardToDelete); 
         }
     }
+
+    public int CardCount()
+    {
+        return cardsList.Count;
+    }
+
+    public Card GetCardAtIndex(int index)
+    {
+        if (index >= 0 && index < cardsList.Count)
+        {
+            return cardsList[index];
+        }
+        else
+        {
+            return null;
+        }
+    }
+    /// <summary>
+    /// Method to find the index of a card based on its ID
+    /// </summary>
+    /// <param name="cardID">ID of the card to find</param>
+    /// <returns>Index of the card in the list, or -1 if not found</returns>
+    public int FindIndex(int cardID)
+    {
+        return cardsList.FindIndex(c => c.cardID == cardID);
+    }
 }
