@@ -50,8 +50,8 @@ namespace Model
             var cardToUpdate = cardsList.FirstOrDefault(c => c.cardID == card.cardID);
             if (cardToUpdate == null) return;
 
-            cardToUpdate.symbolCard = card.symbolCard;
-            cardToUpdate.pictographCard = card.pictographCard;
+            cardToUpdate.symbol = card.symbol;
+            cardToUpdate.pictograph = card.pictograph;
             cardToUpdate.parametersList = card.parametersList;
             cardToUpdate.buildingModel = card.buildingModel;
         }

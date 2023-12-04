@@ -36,6 +36,11 @@ namespace Game
         public CoordinatesList allowedNeighbourList = new CoordinatesList();
 
         /// <summary>
+        /// The grid of cards placed on the game board.
+        /// </summary>
+        public Dictionary<Vector3, Card> cardPlacementTracker = new Dictionary<Vector3, Card>();
+
+        /// <summary>
         /// Flag indicating whether the player can destroy buildings on the game board.
         /// </summary>
         public bool canDestroy = false;

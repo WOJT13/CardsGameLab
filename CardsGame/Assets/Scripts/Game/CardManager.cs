@@ -29,8 +29,8 @@ namespace Game
             var kingCard = new Card
             {
                 cardID = 1,
-                symbolCard = Symbol.Pik,
-                pictographCard = Pictograph.Krol,
+                symbol = Symbol.Pik,
+                pictograph = Pictograph.Krol,
                 parametersList = new List<Parameters>() { new Parameters() { category = "ParametrA", points = 6 }, new Parameters() { category = "ParametrB", points = 5 } },
                 buildingModel = building,
                 treeLocations = new List<Vector3>
@@ -50,8 +50,8 @@ namespace Game
             var asCard = new Card
             {
                 cardID = 1,
-                symbolCard = Symbol.Kier,
-                pictographCard = Pictograph.As,
+                symbol = Symbol.Pik,
+                pictograph = Pictograph.As,
                 parametersList = new List<Parameters>() { new Parameters() { category = "ParametrB", points = 4 } },
                 buildingModel = building,
                 treeLocations = new List<Vector3>
@@ -71,8 +71,8 @@ namespace Game
             var n9Card = new Card
             {
                 cardID = 1,
-                symbolCard = Symbol.Karo,
-                pictographCard = Pictograph.n9,
+                symbol = Symbol.Pik,
+                pictograph = Pictograph.n9,
                 parametersList = new List<Parameters>() { new Parameters() { category = "ParametrB", points = 7 } },
                 buildingModel = building,
                 treeLocations = new List<Vector3>
@@ -92,8 +92,8 @@ namespace Game
             var n3Card = new Card
             {
                 cardID = 1,
-                symbolCard = Symbol.Trefl,
-                pictographCard = Pictograph.n3,
+                symbol = Symbol.Pik,
+                pictograph = Pictograph.n3,
                 parametersList = new List<Parameters>() { new Parameters() { category = "ParametrA", points = 3 } },
                 buildingModel = building,
                 treeLocations = new List<Vector3>
@@ -113,8 +113,8 @@ namespace Game
             var n2Card = new Card
             {
                 cardID = 1,
-                symbolCard = Symbol.Pik,
-                pictographCard = Pictograph.n2,
+                symbol = Symbol.Pik,
+                pictograph = Pictograph.n2,
                 parametersList = new List<Parameters>() { new Parameters() { category = "ParametrA", points = 2 } },
                 buildingModel = building,
                 treeLocations = new List<Vector3>

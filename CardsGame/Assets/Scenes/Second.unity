@@ -268,6 +268,7 @@ GameObject:
   - component: {fileID: 141410717}
   - component: {fileID: 141410715}
   - component: {fileID: 141410718}
+  - component: {fileID: 141410719}
   m_Layer: 0
   m_Name: GameBoardManager
   m_TagString: Untagged
@@ -289,8 +290,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   card:
     cardID: 0
-    symbolCard: 0
-    pictographCard: 0
+    symbol: 0
+    pictograph: 0
     parametersList: []
     buildingModel: {fileID: 0}
     treeLocations: []
@@ -299,6 +300,7 @@ MonoBehaviour:
   canDestroy: 0
   bombsLeft: 0
   canWalk: 0
+  isBoardEmpty: 1
 --- !u!4 &141410716
 Transform:
   m_ObjectHideFlags: 0
@@ -338,6 +340,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 54b1c925c0c0a2b40b73a4ce7cfcc294, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &141410719
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 141410714}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 201e3347656d4264b313646d7635c152, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &173225807
@@ -421,7 +435,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   index: 1
   cardImgDisplay: {fileID: 173225811}
-  isFirst: 1
 --- !u!114 &173225811
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1473,7 +1486,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   index: 0
   cardImgDisplay: {fileID: 861806069}
-  isFirst: 1
 --- !u!114 &861806069
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2224,7 +2236,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   index: 0
   cardImgDisplay: {fileID: 1610701034}
-  isFirst: 1
 --- !u!114 &1610701034
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Model
 {
@@ -115,12 +116,14 @@ namespace Model
     /// <summary>
     /// Symbol of card
     /// </summary>
-    public Symbol symbolCard;
+    [FormerlySerializedAs("symbolCard")]
+    public Symbol symbol;
 
     /// <summary>
     /// Pictograph of card
     /// </summary>
-    public Pictograph pictographCard;
+    [FormerlySerializedAs("pictographCard")]
+    public Pictograph pictograph;
 
     /// <summary>
     /// List of card parameters

@@ -57,6 +57,7 @@ namespace Game
             Debug.Log(selectedPlanePosition);
             var newBuilding = Instantiate(card.buildingModel, selectedPlanePosition, Quaternion.identity);
             gameBoardController.ChangePlaneStatusToOccupied(selectedPlanePosition);
+            gameBoardController.cardPlacementTracker.Add(selectedPlanePosition, card);
 
             var planes = gameBoardController.FindAdjacentPlanes(selectedPlanePosition);
 
@@ -70,6 +71,8 @@ namespace Game
 
             gameBoardController.isBoardEmpty = false;
             Debug.Log(gameBoardController.allowedNeighbourList.Count());
+
+            QuestManager.Instance.CheckQuests(gameBoardController.cardPlacementTracker);
         }
 
 
