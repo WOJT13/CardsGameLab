@@ -1,13 +1,13 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
-
-/// <summary>
-/// Enumeration representing playing card symbols (suits).
-/// </summary>
-[System.Serializable]
-public enum symbol
+namespace Model
+{
+  /// <summary>
+  /// Enumeration representing playing card symbols (suits).
+  /// </summary>
+  [System.Serializable]
+  public enum Symbol
   {
     /// <summary>
     /// The suit of "Pik" (Spades).
@@ -30,10 +30,10 @@ public enum symbol
     Karo
   }
 
-/// <summary>
-/// Enumeration representing playing card pictographs (face values).
-/// </summary>
-public enum pictograph
+  /// <summary>
+  /// Enumeration representing playing card pictographs (face values).
+  /// </summary>
+  public enum Pictograph
   {
     /// <summary>
     /// The Ace card.
@@ -101,11 +101,11 @@ public enum pictograph
     n2
   }
 
-/// <summary>
-/// Class represent card
-/// </summary>
-[System.Serializable]
-public class Card
+  /// <summary>
+  /// Class represent card
+  /// </summary>
+  [System.Serializable]
+  public class Card
   {
     /// <summary>
     /// ID of card
@@ -115,12 +115,12 @@ public class Card
     /// <summary>
     /// Symbol of card
     /// </summary>
-    public symbol symbolCard;
+    public Symbol symbolCard;
 
     /// <summary>
     /// Pictograph of card
     /// </summary>
-    public pictograph pictographCard;
+    public Pictograph pictographCard;
 
     /// <summary>
     /// List of card parameters
@@ -144,3 +144,4 @@ public class Card
 
     public Sprite cardImage;
   }
+}

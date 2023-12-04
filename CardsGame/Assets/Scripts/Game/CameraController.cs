@@ -1,32 +1,34 @@
 ﻿using UnityEngine;
 
-/// <summary>
-/// Controls the camera's movement and rotation based on player input.
-/// </summary>
-public class CameraController : MonoBehaviour
+namespace Game
 {
     /// <summary>
-    /// The speed at which the camera moves.
+    /// Controls the camera's movement and rotation based on player input.
     /// </summary>
-    public float moveSpeed = 5.0f;
-
-    /// <summary>
-    /// The speed at which the camera rotates.
-    /// </summary>
-    public float rotationSpeed = 3.0f;
-
-    /// <summary>
-    /// Update is called once per frame to handle camera movement and rotation.
-    /// </summary>
-    void Update()
+    public class CameraController : MonoBehaviour
     {
-        if (GameBoardController.Instance.canWalk)
-        {
-            float horizontalInput = Input.GetAxis("Horizontal");
-            float verticalInput = Input.GetAxis("Vertical");
+        /// <summary>
+        /// The speed at which the camera moves.
+        /// </summary>
+        public float moveSpeed = 5.0f;
 
-            Vector3 moveDirection = new Vector3(horizontalInput, 0, verticalInput);
-            transform.Translate(moveDirection * moveSpeed * Time.deltaTime);
+        /// <summary>
+        /// The speed at which the camera rotates.
+        /// </summary>
+        public float rotationSpeed = 3.0f;
+
+        /// <summary>
+        /// Update is called once per frame to handle camera movement and rotation.
+        /// </summary>
+        private void Update()
+        {
+            if (!GameBoardController.Instance.canWalk) return;
+
+            var horizontalInput = Input.GetAxis("Horizontal");
+            var verticalInput = Input.GetAxis("Vertical");
+
+            var moveDirection = new Vector3(horizontalInput, 0, verticalInput);
+            transform.Translate(moveDirection * (moveSpeed * Time.deltaTime));
 
             if (Input.GetKey(KeyCode.Q))
             {

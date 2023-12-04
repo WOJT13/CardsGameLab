@@ -1,29 +1,30 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 
-/// <summary>
-/// Controls UI button interactions and actions in the end menu.
-/// </summary>
-public class ButtonsController : MonoBehaviour
+namespace EndMenu
 {
     /// <summary>
-    /// Called when the "Play Again" button is clicked.
-    /// Goes back to main menu
+    /// Controls UI button interactions and actions in the end menu.
     /// </summary>
-    public void onPlayAgainButtonClick()
+    public class ButtonsController : MonoBehaviour
     {
-        DataManager.Instance.difficultyLevel = null;
-        SceneManager.LoadScene(1);
-    }
+        /// <summary>
+        /// Called when the "Play Again" button is clicked.
+        /// Goes back to main menu
+        /// </summary>
+        public void OnPlayAgainButtonClick()
+        {
+            DataManager.Instance.difficultyLevel = null;
+            SceneManager.LoadScene(1);
+        }
 
-    /// <summary>
-    /// Called when the "Quit" button is clicked.
-    /// Quits the application.
-    /// </summary>
-    public void onQuitButtonClick()
-    {
-        Application.Quit();
+        /// <summary>
+        /// Called when the "Quit" button is clicked.
+        /// Quits the application.
+        /// </summary>
+        public void OnQuitButtonClick()
+        {
+            Application.Quit();
+        }
     }
 }

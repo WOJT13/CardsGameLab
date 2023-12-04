@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Model;
+using UnityEngine;
 
 /// <summary>
 /// Manages and stores game data and settings between scenes.

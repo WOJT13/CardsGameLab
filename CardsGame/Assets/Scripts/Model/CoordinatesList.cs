@@ -13,12 +13,16 @@ public class CoordinatesList
     public List<Vector3> coordinatesList = new List<Vector3>();
 
     /// <summary>
-    /// Method which add element to the list
+    /// Method which adds a unique element to the list
     /// </summary>
     /// <param name="coordinates"></param>
-    public void AddToList(Vector3 coordinates)
+    public void AddToListUnique(Vector3 coordinates)
     {
-        coordinatesList.Add(coordinates);
+        // Check if the list already contains the coordinates
+        if (!coordinatesList.Contains(coordinates))
+        {
+            coordinatesList.Add(coordinates);
+        }
     }
 
     /// <summary>
@@ -28,15 +32,15 @@ public class CoordinatesList
     /// <returns>Information that element is in list or not</returns>
     public bool CheckList(Vector3 coordinates)
     {
-        bool OnList=false;
-        foreach(Vector3 c in coordinatesList)
+        bool onList = false;
+        foreach (Vector3 c in coordinatesList)
         {
-            if(coordinates == c)
+            if (coordinates == c)
             {
-                OnList=true;
+                onList = true;
             }
         }
-        return OnList;
+        return onList;
     }
 
     /// <summary>

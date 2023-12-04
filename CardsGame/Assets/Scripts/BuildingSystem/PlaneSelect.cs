@@ -1,94 +1,133 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using Game;
 using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.Serialization;
 
-/// <summary>
-/// Class allows to select planes.
-/// </summary>
-public class PlaneSelect : MonoBehaviour
-{   
+namespace BuildingSystem
+{
     /// <summary>
-    /// Information plane occupied or not
+    /// Class allows to select planes.
     /// </summary>
-    public bool isOcccupied = false;
-
-    /// <summary>
-    /// Information plane is clicked
-    /// </summary>
-    public bool isClicked = false;
-
-    /// <summary>
-    /// Coordinates of selected plane
-    /// </summary>
-    public Vector3 Coordinates { get; private set; }
-   
-    /// <summary>
-    /// Method used for click on the plane
-    /// </summary>
-    private void OnMouseDown()
-    { 
-        if (isClicked)
-        {
-            unselect();
-        }
-        else
-        {
-            select();
-        }
-    }
-
-    /// <summary>
-    /// Method marks the plane
-    /// </summary>
-    private void select()
+    public class PlaneSelect : MonoBehaviour
     {
-        Coordinates = transform.position;
-        if (!isOcccupied)
+        /// <summary>
+        /// Information plane occupied or not
+        /// </summary>
+        [FormerlySerializedAs("isOccupied")]
+        public bool isOcc = false;
+
+        /// <summary>
+        /// Information plane available or not
+        /// </summary>
+        public bool isAvailable = true;
+
+        /// <summary>
+        /// Information plane is clicked
+        /// </summary>
+        public bool isClicked = false;
+
+        /// <summary>
+        /// Coordinates of selected plane
+        /// </summary>
+        public Vector3 Coordinates { get; private set; }
+
+        /// <summary>
+        /// Method used for click on the plane
+        /// </summary>
+        private void OnMouseDown()
         {
+            if (EventSystem.current.IsPointerOverGameObject()) return;
+
+            if (isClicked)
+            {
+                Unselect();
+            }
+            else
+            {
+                Select();
+            }
+        }
+
+        /// <summary>
+        /// Method marks the plane
+        /// </summary>
+        private void Select()
+        {
+            var gameBoardController = GameBoardController.Instance;
+            Coordinates = transform.position;
+
+            if ((isOcc || !isAvailable) && !gameBoardController.isBoardEmpty) return;
+
+            if (gameBoardController.selectedPlanePosition != null)
+            {
+                var selectedPlanePosition = (Vector3)gameBoardController.selectedPlanePosition;
+                var plane = gameBoardController.FindPlane(selectedPlanePosition);
+                plane.Unselect();
+            }
+
             isClicked = true;
-            changeColor(Color.red);
-            safeCoordinates(Coordinates);
+            ChangeColor(Color.red);
+            SaveCoordinates(Coordinates);
         }
-    }
-    
-    /// <summary>
-    /// Method unmark the plane
-    /// </summary>
-    public void unselect()
-    {
-        Coordinates = transform.position;
-        isClicked =false;
-        isOcccupied=false;
-        changeColor(Color.white);
-        removeCoordinates(Coordinates);
-    }
 
-    /// <summary>
-    /// Method changes plane color
-    /// </summary>
-    /// <param name="color"></param>
-    public void changeColor(Color color)
-    {
-        Renderer renderer = GetComponent<Renderer>();
-        renderer.material.color = color;
-    }
+        /// <summary>
+        /// Method unmark the plane
+        /// </summary>
+        public void Unselect()
+        {
+            Coordinates = transform.position;
+            isClicked = false;
+            if (isAvailable)
+            {
+                ChangeColor(Color.blue);
+            }
+            else
+            {
+                ChangeColor(Color.white);
+            }
+            RemoveCoordinates(Coordinates);
+        }
 
-    /// <summary>
-    /// Method saves plane coordinates
-    /// </summary>
-    /// <param name="coordinates"></param>
-    private void safeCoordinates(Vector3 coordinates)
-    {
-        GameBoardController.Instance.coordinatesList.AddToList(coordinates);
-        Debug.Log("Lista");
-    }
+        /// <summary>
+        /// Method changes plane status to occupied
+        /// </summary>
+        public void StatusToOccupied()
+        {
+            isOcc = true;
+            isAvailable = false;
+            ChangeColor(Color.gray);
+            RemoveCoordinates(Coordinates);
+        }
 
-    /// <summary>
-    /// Method removes plane coordinates
-    /// </summary>
-    /// <param name="coordinates"></param>
-    public void removeCoordinates(Vector3 coordinates)
-    {
-        GameBoardController.Instance.coordinatesList.RemoveFromList(coordinates);
+        /// <summary>
+        /// Method changes plane color
+        /// </summary>
+        /// <param name="color"></param>
+        public void ChangeColor(Color color)
+        {
+            var component = GetComponent<Renderer>();
+            component.material.color = color;
+        }
+
+        /// <summary>
+        /// Method saves plane coordinates
+        /// </summary>
+        /// <param name="coordinates"></param>
+        private void SaveCoordinates(Vector3 coordinates)
+        {
+            //GameBoardController.Instance.coordinatesList.AddToListUnique(coordinates);
+            GameBoardController.Instance.selectedPlanePosition = coordinates;
+            Debug.Log("Lista");
+        }
+
+        /// <summary>
+        /// Method removes plane coordinates
+        /// </summary>
+        /// <param name="coordinates"></param>
+        public void RemoveCoordinates(Vector3 coordinates)
+        {
+            //GameBoardController.Instance.coordinatesList.RemoveFromList(coordinates);
+            GameBoardController.Instance.selectedPlanePosition = null;
+        }
     }
 }

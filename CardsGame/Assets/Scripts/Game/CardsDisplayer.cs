@@ -1,157 +1,77 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
-/// <summary>
-/// Class displays card and place building model
-/// </summary>
-public class CardsDisplayer : MonoBehaviour
+namespace Game
 {
     /// <summary>
-    /// Card index
+    /// Class displays card and place building model
     /// </summary>
-    public int index;
-
-    /// <summary>
-    /// Card image
-    /// </summary>
-    public Image cardImgDisplay;
-
-    /// <summary>
-    /// Information about first building on grid
-    /// </summary>
-    public bool isFirst = true;
-
-
-    void Start()
+    public class CardsDisplayer : MonoBehaviour
     {
-        Display(index);
-    }
+        /// <summary>
+        /// Card index
+        /// </summary>
+        public int index;
 
-    /// <summary>
-    /// Method display card
-    /// </summary>
-    /// <param name="cardIndex"></param>
-  
-    public void Display(int cardIndex)
-    {
-        if(cardIndex >=0 && cardIndex < GameBoardController.Instance.cardList.CardCount())
+        /// <summary>
+        /// Card image
+        /// </summary>
+        public Image cardImgDisplay;
+
+        private void Start()
         {
-            Card displayedCard = GameBoardController.Instance.cardList.GetCardAtIndex(cardIndex);
+            Display(index);
+        }
 
+        /// <summary>
+        /// Method display card
+        /// </summary>
+        /// <param name="cardIndex"></param>
+        public void Display(int cardIndex)
+        {
+            if (cardIndex < 0 || cardIndex >= GameBoardController.Instance.cardList.CardCount()) return;
+
+            var displayedCard = GameBoardController.Instance.cardList.GetCardAtIndex(cardIndex);
             cardImgDisplay.sprite = displayedCard.cardImage;
         }
-    }
 
-    /// <summary>
-    /// Method used for click on card
-    /// </summary>
-    public void PlaceOnClick()
-    {
-        var card = GameBoardController.Instance.cardList.GetAll()[index];
-        Vector3 buildingPos = GameBoardController.Instance.coordinatesList.GetFirstElement();
-        PlaneSelect plane = FindPlane(buildingPos);
-        Debug.Log(plane.isOcccupied);
-        if (isFirst)
+        /// <summary>
+        /// Method used for click on card
+        /// </summary>
+        public void PlaceOnClick()
         {
-            Debug.Log(buildingPos);
-            GameObject newBuilding = Instantiate(card.buildingModel, buildingPos, Quaternion.identity);
-            UnselectPlane(buildingPos);
-            plane.isOcccupied = true;
+            var gameBoardController = GameBoardController.Instance;
+            var card = gameBoardController.cardList.GetAll()[index];
 
-            PlaneSelect[] planes = FindAdjacentPlanes(buildingPos);
-
-
-            foreach (PlaneSelect neighboplanes in planes)
+            if (gameBoardController.selectedPlanePosition is null)
             {
-                neighboplanes.changeColor(Color.blue);
-                Vector3 coordinates = neighboplanes.Coordinates;
-                GameBoardController.Instance.neigbborList.AddToList(coordinates);
+                return;
             }
-            isFirst = false;
-            Debug.Log(GameBoardController.Instance.neigbborList.Count());
-        }
-        else if (plane != null && GameBoardController.Instance.neigbborList.CheckList(buildingPos))
-        {
-            Debug.Log(buildingPos);
-            GameObject newBuilding = Instantiate(card.buildingModel, buildingPos, Quaternion.identity);
-            UnselectPlane(buildingPos);
-            plane.isOcccupied = true;
-            
-            PlaneSelect[] planes = FindAdjacentPlanes(buildingPos);
 
-            
-            foreach(PlaneSelect neighboplanes in planes)
+            var selectedPlanePosition = (Vector3)gameBoardController.selectedPlanePosition;
+            var plane = gameBoardController.FindPlane(selectedPlanePosition);
+            Debug.Log(plane.isOcc);
+
+            if (!gameBoardController.isBoardEmpty && (plane == null || !gameBoardController.allowedNeighbourList.CheckList(selectedPlanePosition))) return;
+
+            Debug.Log(selectedPlanePosition);
+            var newBuilding = Instantiate(card.buildingModel, selectedPlanePosition, Quaternion.identity);
+            gameBoardController.ChangePlaneStatusToOccupied(selectedPlanePosition);
+
+            var planes = gameBoardController.FindAdjacentPlanes(selectedPlanePosition);
+
+            foreach (var neighboringPlane in planes)
             {
-                neighboplanes.changeColor(Color.blue);
-                Vector3 coordinates = neighboplanes.Coordinates;
-                GameBoardController.Instance.neigbborList.AddToList(coordinates);
+                neighboringPlane.ChangeColor(Color.blue);
+                neighboringPlane.isAvailable = true;
+                var coordinates = neighboringPlane.transform.position;
+                gameBoardController.allowedNeighbourList.AddToListUnique(coordinates);
             }
-            Debug.Log(GameBoardController.Instance.neigbborList.Count());
-        }
-        
-    }
 
-    /// <summary>
-    /// Method allows unmark plane
-    /// </summary>
-    /// <param name="coordinates"></param>
-    private void UnselectPlane(Vector3 coordinates)
-    {
-        PlaneSelect[] all = FindObjectsOfType<PlaneSelect>();
-        foreach (PlaneSelect plane in all)
-        {
-            if (plane.isClicked && plane.transform.position == coordinates)
-            {
-                plane.unselect();
-                break;
-            }
-        }
-    }
-
-    /// <summary>
-    /// Method finds plane
-    /// </summary>
-    /// <param name="position"></param>
-    /// <returns>Plane</returns>
-    private PlaneSelect FindPlane(Vector3 position)
-    {
-        Collider[] colliders = Physics.OverlapSphere(position, 0.1f);
-        foreach (Collider collider in colliders)
-        {
-            PlaneSelect plane = collider.GetComponent<PlaneSelect>();
-            if (plane != null)
-            {
-                return plane;
-            }
-        }
-        return null;
-    }
-
-    /// <summary>
-    /// Method finds buildings neihbor planes
-    /// </summary>
-    /// <param name="position"></param>
-    /// <returns>List of planes</returns>
-    private PlaneSelect[] FindAdjacentPlanes(Vector3 position)
-    {
-        float radius = 10.0f;
-
-        Collider[] colliders = Physics.OverlapSphere(position, radius);
-
-        List<PlaneSelect> adjacentPlanes = new List<PlaneSelect>();
-
-        foreach (Collider collider in colliders)
-        {
-            PlaneSelect plane = collider.GetComponent<PlaneSelect>();
-
-            if (plane != null && !plane.isOcccupied)
-            {
-                adjacentPlanes.Add(plane);
-            }
+            gameBoardController.isBoardEmpty = false;
+            Debug.Log(gameBoardController.allowedNeighbourList.Count());
         }
 
-        return adjacentPlanes.ToArray();
+
     }
 }

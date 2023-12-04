@@ -1,59 +1,60 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-/// <summary>
-/// Class creates the grid
-/// </summary>
-public class GridManager : MonoBehaviour
+namespace Game
 {
     /// <summary>
-    /// Column length of grid
+    /// Class creates the grid
     /// </summary>
-    [SerializeField]
-    public int columnLength;
-    /// <summary>
-    /// Row length of grid
-    /// </summary>
-    [SerializeField]
-    public int rowLength;
-
-    /// <summary>
-    /// Space between parts of grid
-    /// </summary>
-    public int x_Space;
-   /// <summary>
-   /// Space between parts of grid
-   /// </summary>
-    public int z_Space;
-
-    /// <summary>
-    /// Plane which create the grid
-    /// </summary>
-    [SerializeField]
-    private GameObject prefab;
-
-    /// <summary>
-    /// Bool variable informed that grid is created
-    /// </summary>
-    public bool gridIsCreated;
-
-
-    /// <summary>
-    /// Method which create a grid
-    /// </summary>
-    void Start()
+    public class GridManager : MonoBehaviour
     {
-        if(gridIsCreated == false)
+        /// <summary>
+        /// Column length of grid
+        /// </summary>
+        [SerializeField]
+        public int columnLength;
+        /// <summary>
+        /// Row length of grid
+        /// </summary>
+        [SerializeField]
+        public int rowLength;
+
+        /// <summary>
+        /// Space between parts of grid
+        /// </summary>
+        public int x_Space;
+        /// <summary>
+        /// Space between parts of grid
+        /// </summary>
+        public int z_Space;
+
+        /// <summary>
+        /// Plane which create the grid
+        /// </summary>
+        [SerializeField]
+        private GameObject prefab;
+
+        /// <summary>
+        /// Bool variable informed that grid is created
+        /// </summary>
+        public bool gridIsCreated;
+
+
+        /// <summary>
+        /// Method which create a grid
+        /// </summary>
+        void Start()
         {
-            for(int i = 0; i < columnLength; i++)
-            { 
-                for(int j = 0; j < rowLength; j++)
+            if(gridIsCreated == false)
+            {
+                for(int i = 0; i < columnLength; i++)
                 {
-                    Instantiate(prefab, new Vector3(x_Space*i-5,0,j*z_Space), Quaternion.identity);
+                    for(int j = 0; j < rowLength; j++)
+                    {
+                        Instantiate(prefab, new Vector3(x_Space*i-5,0,j*z_Space), Quaternion.identity);
+                    }
                 }
+                gridIsCreated = true;
             }
-            gridIsCreated = true;
         }
     }
 }
