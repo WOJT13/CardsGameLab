@@ -56,7 +56,8 @@ namespace BuildingSystem
             var gameBoardController = GameBoardController.Instance;
             Coordinates = transform.position;
 
-            if ((isOcc || !isAvailable) && !gameBoardController.isBoardEmpty) return;
+            if (!gameBoardController.isBoardEmpty &&
+            ( (isOcc || !isAvailable) || !gameBoardController.allowedNeighbourList.CheckList(Coordinates))) return;
 
             if (gameBoardController.selectedPlanePosition != null)
             {
@@ -68,6 +69,9 @@ namespace BuildingSystem
             isClicked = true;
             ChangeColor(Color.red);
             SaveCoordinates(Coordinates);
+            
+
+            
         }
 
         /// <summary>
@@ -77,7 +81,7 @@ namespace BuildingSystem
         {
             Coordinates = transform.position;
             isClicked = false;
-            if (isAvailable)
+            if (isAvailable && !GameBoardController.Instance.isBoardEmpty)
             {
                 ChangeColor(Color.blue);
             }
@@ -95,6 +99,7 @@ namespace BuildingSystem
         {
             isOcc = true;
             isAvailable = false;
+            isClicked = false;
             ChangeColor(Color.gray);
             RemoveCoordinates(Coordinates);
         }
