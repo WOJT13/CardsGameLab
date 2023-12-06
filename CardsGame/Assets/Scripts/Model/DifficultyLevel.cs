@@ -25,9 +25,19 @@ namespace Model
         public List<Parameter> parameters;
 
         /// <summary>
-        /// The number of bombs available in this difficulty level.
+        /// The number of bombs available at the begining of this difficulty level.
         /// </summary>
-        public int bombCount;
+        public int startBombsCount;
+        
+        /// <summary>
+        /// The number of doubleUps available at the begining of this difficulty level.
+        /// </summary>
+        public int startDoubleUpsCount;
+        
+        /// <summary>
+        /// The number of cards available at the begining of this difficulty level.
+        /// </summary>
+        public int startCardsCount;
     }
 
     /// <summary>

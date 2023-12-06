@@ -37,7 +37,9 @@ namespace MainMenu
                 parameters = new List<Parameter>()
             };
             easyLevel.parameters.Add(new Parameter() { name = "ParametrA", min = 1, max = 10 });
-            easyLevel.bombCount = 3;
+            easyLevel.startBombsCount = 5;
+            easyLevel.startDoubleUpsCount = 3;
+            easyLevel.startCardsCount = 6;
             difficultyLevelsList.Create(easyLevel);
 
             var hardLevel = new DifficultyLevel
@@ -48,7 +50,9 @@ namespace MainMenu
             };
             hardLevel.parameters.Add(new Parameter() { name = "ParametrA", min = 1, max = 10 });
             hardLevel.parameters.Add(new Parameter() { name = "ParametrB", min = 5, max = 15 });
-            hardLevel.bombCount = 5;
+            hardLevel.startBombsCount = 3;
+            hardLevel.startDoubleUpsCount = 1;
+            hardLevel.startCardsCount = 4;
             difficultyLevelsList.Create(hardLevel);
 
             DataManager.Instance.difficultyLevelsList = difficultyLevelsList;

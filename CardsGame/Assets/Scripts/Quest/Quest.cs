@@ -83,6 +83,10 @@ namespace Quest
         /// <summary>
         /// Card reward.
         /// </summary>
-        Cards
+        Cards,
+        /// <summary>
+        /// Double up reward.
+        /// </summary>
+        DoubleUp
     }
 }

@@ -70,7 +70,6 @@ namespace Game
             }
 
             gameBoardController.isBoardEmpty = false;
-            Debug.Log(gameBoardController.allowedNeighbourList.Count());
 
             QuestManager.Instance.CheckQuests(gameBoardController.cardPlacementTracker);
         }

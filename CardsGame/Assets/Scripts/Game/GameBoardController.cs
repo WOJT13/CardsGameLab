@@ -45,10 +45,30 @@ namespace Game
         /// </summary>
         public bool canDestroy = false;
 
+        // <summary>
+        /// Flag indicating whether the player can double points.
+        /// </summary>
+        public bool canDoublePoints = false;
+
         /// <summary>
         /// The number of bombs left for the player to use.
         /// </summary>
         public int bombsLeft;
+
+        /// <summary>
+        /// The number of doubleUps left for the player to use.
+        /// </summary>
+        public int doubleUpsLeft;
+
+        /// <summary>
+        /// The number of cards left for the player to use.
+        /// </summary>
+        public int cardsLeft;
+
+        /// <summary>
+        /// The number of points.
+        /// </summary>
+        public int points;
 
         /// <summary>
         /// Flag indicating whether the player can move on the game board.
@@ -133,6 +153,26 @@ namespace Game
             }
 
             return adjacentPlanes.ToArray();
+        }
+
+        public void CreateNeighbourhood()
+        {
+            var newNeighbourhood = new CoordinatesList();
+
+            foreach (var building in cardPlacementTracker)
+            {
+                var planes = FindAdjacentPlanes(building.Key);
+
+                foreach(var neighboringPlane in planes)
+                {
+                    neighboringPlane.ChangeColor(Color.blue);
+                    neighboringPlane.isAvailable = true;
+                    var coordinates = neighboringPlane.transform.position;
+                    newNeighbourhood.AddToListUnique(coordinates);
+                }
+            }
+            allowedNeighbourList = newNeighbourhood;
+
         }
     }
 }

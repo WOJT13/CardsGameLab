@@ -47,7 +47,9 @@ namespace Model
             DifficultyLevel levelToUpdate = difficultyLevels.FirstOrDefault(dl => dl.name == difficultyLevel.name);
             if (levelToUpdate != null)
             {
-                levelToUpdate.bombCount = difficultyLevel.bombCount;
+                levelToUpdate.startBombsCount = difficultyLevel.startBombsCount;
+                levelToUpdate.startDoubleUpsCount = difficultyLevel.startDoubleUpsCount;
+                levelToUpdate.startCardsCount = difficultyLevel.startCardsCount;
                 levelToUpdate.icon = difficultyLevel.icon;
                 levelToUpdate.parameters = difficultyLevel.parameters;
             }

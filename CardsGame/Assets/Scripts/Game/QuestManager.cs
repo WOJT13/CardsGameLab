@@ -40,10 +40,10 @@ namespace Game
             }
 
             quests.Add(new Quest.Quest("COLOR!", "Connect 4 cards with the same color", new List<Quest.QuestRequirement>() { new Quest.FourCardsSameWithSymbolConnected() }, Quest.RewardType.Score, 5));
-            quests.Add(new Quest.Quest("Pair!", "Connect 2 cards with the same pictograph", new List<Quest.QuestRequirement>() { new Quest.TwoCardsWithTheSamePictographConnected() }, Quest.RewardType.Score, 5));
+            //quests.Add(new Quest.Quest("Pair!", "Connect 2 cards with the same pictograph", new List<Quest.QuestRequirement>() { new Quest.TwoCardsWithTheSamePictographConnected() }, Quest.RewardType.Score, 5));
 
             quests.Add(new Quest.Quest("COLOR!", "Connect 4 cards with the same color", new List<Quest.QuestRequirement>() { new Quest.FourCardsSameWithSymbolConnected() }, Quest.RewardType.Bombs, 2));
-            quests.Add(new Quest.Quest("Pair!", "Connect 2 cards with the same pictograph", new List<Quest.QuestRequirement>() { new Quest.TwoCardsWithTheSamePictographConnected() }, Quest.RewardType.Bombs, 2));
+            //quests.Add(new Quest.Quest("Pair!", "Connect 2 cards with the same pictograph", new List<Quest.QuestRequirement>() { new Quest.TwoCardsWithTheSamePictographConnected() }, Quest.RewardType.Bombs, 2));
 
             availableQuests.Add(quests[UnityEngine.Random.Range(0, quests.Count)]);
         }
@@ -54,7 +54,8 @@ namespace Game
         /// <param name="cardPlacementTracker">The tracker of card placements.</param>
         public void CheckQuests(Dictionary<Vector3, Card> cardPlacementTracker)
         {
-            foreach (var quest in quests.Where(quest => quest.IsCompleted(cardPlacementTracker)))
+            var completedQuests = new List<Quest.Quest>(availableQuests.Where(quest => quest.IsCompleted(cardPlacementTracker)));
+            foreach (var quest in completedQuests)
             {
                 GrantReward(quest.reward, quest.rewardAmount);
 
@@ -74,11 +75,18 @@ namespace Game
             {
                 case RewardType.Score:
                 {
-                    var pointsManager = PointsManager.Instance;
-                    if (pointsManager == null) return;
+                    var gameBoardController = GameBoardController.Instance;
+                    if (gameBoardController == null) return;
 
-                    var parameterWithPoints = pointsManager.parameters.First();
-                    parameterWithPoints.points += rewardAmount;
+                    Debug.Log($"double: {gameBoardController.canDoublePoints}");
+
+                    if(gameBoardController.canDoublePoints && gameBoardController.doubleUpsLeft > 0)
+                    {
+                        rewardAmount *= 2;
+                        gameBoardController.doubleUpsLeft--;
+                    }
+
+                    gameBoardController.points += rewardAmount;
                     break;
                 }
                 case RewardType.Cards:

@@ -51,13 +51,17 @@ namespace Game
         /// </summary>
         private void OnMouseDown()
         {
+            var gameBoardController = GameBoardController.Instance;
+            if (gameBoardController == null)
+                return;
+
             if (EventSystem.current.IsPointerOverGameObject()) return;
 
             //Check if building can be destroyed
-            if (GameBoardController.Instance.canDestroy != true || GameBoardController.Instance.bombsLeft <= 0) return;
+            if (gameBoardController.canDestroy != true || gameBoardController.bombsLeft <= 0) return;
 
             // Decrease the count of available bombs
-            GameBoardController.Instance.bombsLeft--;
+            gameBoardController.bombsLeft--;
 
             // Update points for associated parameters
             foreach (var parameter in points)
@@ -69,6 +73,29 @@ namespace Game
                     parameterToUpdate.points -= parameter.points;
                 }
             }
+
+            var plane = gameBoardController.FindPlane(transform.position);
+            plane.isAvailable = true;
+            plane.isOcc = false;
+
+            if (gameBoardController.cardPlacementTracker.Count == 1)
+                gameBoardController.isBoardEmpty = true;
+
+            if(gameBoardController.isBoardEmpty)
+                plane.ChangeColor(Color.white);
+            else
+                plane.ChangeColor(Color.blue);
+
+            var neighboringPlanes = gameBoardController.FindAdjacentPlanes(transform.position);
+
+            gameBoardController.cardPlacementTracker.Remove(transform.position);
+            foreach(var neighboringPlane in neighboringPlanes)
+            {
+                neighboringPlane.ChangeColor(Color.white);
+                neighboringPlane.isAvailable = false;
+            }
+
+            gameBoardController.CreateNeighbourhood();
 
             // Destroy the building
             Destroy(gameObject);
