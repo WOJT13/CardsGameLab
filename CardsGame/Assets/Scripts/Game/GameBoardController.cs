@@ -26,6 +26,11 @@ namespace Game
         public CardsList cardList = null;
 
         /// <summary>
+        /// Reference to a list of card objects.
+        /// </summary>
+        public CardsList hand = null;
+
+        /// <summary>
         /// The position of the selected plane.
         /// </summary>
         public Vector3? selectedPlanePosition = null;

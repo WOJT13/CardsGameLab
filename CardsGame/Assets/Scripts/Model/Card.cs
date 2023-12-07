@@ -136,6 +136,11 @@ namespace Model
     public GameObject buildingModel;
 
     /// <summary>
+    /// Model of card
+    /// </summary>
+    public GameObject cardModel;
+
+    /// <summary>
     /// List of possible tree locations
     /// </summary>
     public List<Vector3> treeLocations;// Potential locations for trees

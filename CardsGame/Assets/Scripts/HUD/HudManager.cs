@@ -21,6 +21,11 @@ namespace HUD
         public TMP_Text pointsText;
 
         /// <summary>
+        /// Reference to the Text Mesh Pro (TMP) text component for the cards left.
+        /// </summary>
+        public TMP_Text cardsText;
+
+        /// <summary>
         /// Reference to the Text Mesh Pro (TMP) text component for bombs count.
         /// </summary>
         public TMP_Text bombsCount;
@@ -57,13 +62,16 @@ namespace HUD
             levelIcon.sprite = DataManager.Instance.difficultyLevel.icon;
 
             // Set the initial bomb count in the HUD
-            bombsCount.text = "Liczba bomb:" + DataManager.Instance.difficultyLevel.startBombsCount.ToString();
-            Debug.Log(DataManager.Instance.difficultyLevel.startBombsCount);
+            bombsCount.text = "Liczba bomb: " + DataManager.Instance.difficultyLevel.startBombsCount.ToString();
+
             // Set the initial bomb count in the HUD
-            doubleUpsCount.text = "Liczba podwojeń:" + DataManager.Instance.difficultyLevel.startDoubleUpsCount.ToString();
+            doubleUpsCount.text = "Liczba podwojeń: " + DataManager.Instance.difficultyLevel.startDoubleUpsCount.ToString();
 
             // Set the initial points in the HUD
             pointsText.text = "Punkty: 0";
+
+            // Set the initial points in the HUD
+            cardsText.text = "Karty na ręce: " + DataManager.Instance.difficultyLevel.startCardsCount.ToString();;
 
             // Listen to the toggle's state change event
             bombsToggle.onValueChanged.AddListener(OnBombsToggleValueChanged);
@@ -88,6 +96,9 @@ namespace HUD
 
             // Update the points in the HUD
             pointsText.text = "Punkty:" + GameBoardController.Instance.points.ToString();
+
+            // Update the points in the HUD
+            cardsText.text = "Karty na ręce:" + GameBoardController.Instance.cardsLeft.ToString();
         }
 
         /// <summary>

@@ -26,6 +26,11 @@ namespace Game
         public List<Quest.Quest> availableQuests = new List<Quest.Quest>();
 
         /// <summary>
+        /// The container where the card objects will be instantiated.
+        /// </summary>
+        public Transform container;
+
+        /// <summary>
         /// Called on object initialization.
         /// </summary>
         private void Awake()
@@ -40,10 +45,11 @@ namespace Game
             }
 
             quests.Add(new Quest.Quest("COLOR!", "Connect 4 cards with the same color", new List<Quest.QuestRequirement>() { new Quest.FourCardsSameWithSymbolConnected() }, Quest.RewardType.Score, 5));
-            //quests.Add(new Quest.Quest("Pair!", "Connect 2 cards with the same pictograph", new List<Quest.QuestRequirement>() { new Quest.TwoCardsWithTheSamePictographConnected() }, Quest.RewardType.Score, 5));
+            quests.Add(new Quest.Quest("Pair!", "Connect 2 cards with the same pictograph", new List<Quest.QuestRequirement>() { new Quest.TwoCardsWithTheSamePictographConnected() }, Quest.RewardType.Score, 5));
 
             quests.Add(new Quest.Quest("COLOR!", "Connect 4 cards with the same color", new List<Quest.QuestRequirement>() { new Quest.FourCardsSameWithSymbolConnected() }, Quest.RewardType.Bombs, 2));
-            //quests.Add(new Quest.Quest("Pair!", "Connect 2 cards with the same pictograph", new List<Quest.QuestRequirement>() { new Quest.TwoCardsWithTheSamePictographConnected() }, Quest.RewardType.Bombs, 2));
+            quests.Add(new Quest.Quest("COLOR!", "Connect 4 cards with the same color", new List<Quest.QuestRequirement>() { new Quest.FourCardsSameWithSymbolConnected() }, Quest.RewardType.Cards, 2));
+            quests.Add(new Quest.Quest("Pair!", "Connect 2 cards with the same pictograph", new List<Quest.QuestRequirement>() { new Quest.TwoCardsWithTheSamePictographConnected() }, Quest.RewardType.Bombs, 2));
 
             availableQuests.Add(quests[UnityEngine.Random.Range(0, quests.Count)]);
         }
@@ -90,7 +96,23 @@ namespace Game
                     break;
                 }
                 case RewardType.Cards:
+                {  
+                    var gameBoardController = GameBoardController.Instance;
+                    if (gameBoardController == null) return;
+
+                    for(int i=0; i < rewardAmount; i++)
+                    {
+                        var drawedCard = gameBoardController.cardList.GetCardAtIndex(UnityEngine.Random.Range(0, gameBoardController.cardList.CardCount()));
+                        GameBoardController.Instance.hand.Create(drawedCard);
+                        var newGameObject = Instantiate(drawedCard.cardModel, container);
+                        var newCard = newGameObject.GetComponent<CardsDisplayer>();
+                        newCard.id = drawedCard.cardID;
+                    }
+
+                    gameBoardController.cardsLeft = GameBoardController.Instance.hand.CardCount();
+
                     break;
+                }
                 case RewardType.Bombs:
                 {
                     var gameBoardController = GameBoardController.Instance;
