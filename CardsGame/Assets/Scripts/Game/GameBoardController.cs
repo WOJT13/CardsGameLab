@@ -70,6 +70,11 @@ namespace Game
         /// </summary>
         public int cardsLeft;
 
+         /// <summary>
+        /// The number of cards left in deck.
+        /// </summary>
+        public int cardsLeftInDeck;
+
         /// <summary>
         /// The number of points.
         /// </summary>

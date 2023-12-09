@@ -87,6 +87,6 @@ namespace Quest
         /// <summary>
         /// Double up reward.
         /// </summary>
-        DoubleUp
+        DoubleUps
     }
 }

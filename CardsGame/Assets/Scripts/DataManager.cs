@@ -32,6 +32,11 @@ public class DataManager : MonoBehaviour
     public bool IsWin = false;
 
     /// <summary>
+    /// A points gained in game.
+    /// </summary>
+    public int points;
+
+    /// <summary>
     /// Called on object initialization.
     /// Initializes the DataManager and ensures it persists between scenes.
     /// </summary>

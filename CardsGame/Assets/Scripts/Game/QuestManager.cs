@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using TMPro;
 
 namespace Game
 {
@@ -25,10 +26,22 @@ namespace Game
 
         public List<Quest.Quest> availableQuests = new List<Quest.Quest>();
 
+        public List<GameObject> availableQuestsObjects = new List<GameObject>();
+
         /// <summary>
         /// The container where the card objects will be instantiated.
         /// </summary>
-        public Transform container;
+        public Transform cardsContainer;
+
+        /// <summary>
+        /// The container where the quest objects will be instantiated.
+        /// </summary>
+        public Transform questsContainer;
+
+        /// <summary>
+        /// The prefab for quest objects.
+        /// </summary>
+        public Transform questPrefab;
 
         /// <summary>
         /// Called on object initialization.
@@ -52,6 +65,13 @@ namespace Game
             quests.Add(new Quest.Quest("Pair!", "Connect 2 cards with the same pictograph", new List<Quest.QuestRequirement>() { new Quest.TwoCardsWithTheSamePictographConnected() }, Quest.RewardType.Bombs, 2));
 
             availableQuests.Add(quests[UnityEngine.Random.Range(0, quests.Count)]);
+            availableQuests.Add(quests[UnityEngine.Random.Range(0, quests.Count)]);
+            availableQuests.Add(quests[UnityEngine.Random.Range(0, quests.Count)]);
+
+            foreach (var quest in availableQuests)
+            {
+                ShowQuest(quest);
+            }
         }
 
         /// <summary>
@@ -67,6 +87,14 @@ namespace Game
 
                 availableQuests.Remove(quest);
                 availableQuests.Add(quests[UnityEngine.Random.Range(0, quests.Count)]);
+                foreach (var questObject in availableQuestsObjects)
+                {
+                    Destroy(questObject);
+                }
+                foreach (var availableQuest in availableQuests)
+                {
+                    ShowQuest(availableQuest);
+                }
             }
         }
 
@@ -84,8 +112,6 @@ namespace Game
                     var gameBoardController = GameBoardController.Instance;
                     if (gameBoardController == null) return;
 
-                    Debug.Log($"double: {gameBoardController.canDoublePoints}");
-
                     if(gameBoardController.canDoublePoints && gameBoardController.doubleUpsLeft > 0)
                     {
                         rewardAmount *= 2;
@@ -102,14 +128,14 @@ namespace Game
 
                     for(int i=0; i < rewardAmount; i++)
                     {
-                        var drawedCard = gameBoardController.cardList.GetCardAtIndex(UnityEngine.Random.Range(0, gameBoardController.cardList.CardCount()));
-                        GameBoardController.Instance.hand.Create(drawedCard);
-                        var newGameObject = Instantiate(drawedCard.cardModel, container);
+                        var drawedCard = gameBoardController.cardList.DrawCard();
+                        gameBoardController.hand.Create(drawedCard);
+                        var newGameObject = Instantiate(drawedCard.cardModel, cardsContainer);
                         var newCard = newGameObject.GetComponent<CardsDisplayer>();
                         newCard.id = drawedCard.cardID;
                     }
 
-                    gameBoardController.cardsLeft = GameBoardController.Instance.hand.CardCount();
+                    gameBoardController.cardsLeft = gameBoardController.hand.CardCount();
 
                     break;
                 }
@@ -121,8 +147,53 @@ namespace Game
                     gameBoardController.bombsLeft += rewardAmount;
                     break;
                 }
+                case RewardType.DoubleUps:
+                {
+                    var gameBoardController = GameBoardController.Instance;
+                    if (gameBoardController == null) return;
+
+                    gameBoardController.doubleUpsLeft += rewardAmount;
+                    break;
+                }
                 default:
                     throw new ArgumentException("Invalid reward type.");
+            }
+        }
+
+        private void ShowQuest(Quest.Quest quest)
+        {
+            var questObject = Instantiate(questPrefab, questsContainer);
+
+            // Set the parameter's name, min-max text, score text, and info text
+            questObject.Find("nameText").GetComponent<TMP_Text>().text = quest.name;
+            questObject.Find("descriptionText").GetComponent<TMP_Text>().text = $"{quest.description}";
+            questObject.Find("rewardText").GetComponent<TMP_Text>().text = MapReward(quest.reward, quest.rewardAmount);
+
+            availableQuestsObjects.Add(questObject.gameObject);
+        }
+
+        private string MapReward(RewardType reward, int rewardAmount)
+        {
+            switch (reward)
+            {
+                case RewardType.Score:
+                {
+                    return $"Punkty: {rewardAmount}";
+                }
+                case RewardType.Cards:
+                {  
+                    return $"Karty: {rewardAmount}";
+                }
+                case RewardType.Bombs:
+                {
+                    return $"Bomby: {rewardAmount}";
+                }
+                case RewardType.DoubleUps:
+                {
+                    return $"Podwojenia: {rewardAmount}";
+                }
+                default:
+                    return $"Nie ma nagrody ;-)";
             }
         }
     }

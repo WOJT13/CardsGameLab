@@ -10,19 +10,19 @@ namespace Game
         /// <summary>
         /// The speed at which the camera moves.
         /// </summary>
-        public float moveSpeed = 5.0f;
+        public float moveSpeed = 550.0f;
 
         /// <summary>
         /// The speed at which the camera rotates.
         /// </summary>
-        public float rotationSpeed = 3.0f;
+        public float rotationSpeed = 15.0f;
 
         /// <summary>
         /// Update is called once per frame to handle camera movement and rotation.
         /// </summary>
         private void Update()
         {
-            if (!GameBoardController.Instance.canWalk) return;
+            //if (!GameBoardController.Instance.canWalk) return;
 
             var horizontalInput = Input.GetAxis("Horizontal");
             var verticalInput = Input.GetAxis("Vertical");

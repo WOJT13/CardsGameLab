@@ -77,14 +77,7 @@ namespace Game
 
             QuestManager.Instance.CheckQuests(gameBoardController.cardPlacementTracker);
             Destroy(gameObject);
-            Debug.Log($"hand.CardCount(): {gameBoardController.hand.CardCount()}");
             gameBoardController.hand.Remove(card.cardID);
-            Debug.Log($"card.cardID: {card.cardID}");
-            Debug.Log($"hand.CardCount()2: {gameBoardController.hand.CardCount()}");
-            foreach(var hand in gameBoardController.hand.GetAll())
-            {
-                Debug.Log($"hand id: {hand.cardID}");
-            }
             gameBoardController.cardsLeft = gameBoardController.hand.CardCount();
 
         }

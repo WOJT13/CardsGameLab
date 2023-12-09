@@ -103,5 +103,15 @@ namespace Model
         {
             return cardsList.FindIndex(c => c.cardID == cardID);
         }
+
+        public Card DrawCard()
+        {
+            var index = UnityEngine.Random.Range(0, cardsList.Count);
+            if (cardsList[index].isDrawed == true)
+                DrawCard();
+            
+            cardsList[index].isDrawed = true;
+            return cardsList[index];
+        }
     }
 }

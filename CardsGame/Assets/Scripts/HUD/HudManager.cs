@@ -21,9 +21,14 @@ namespace HUD
         public TMP_Text pointsText;
 
         /// <summary>
-        /// Reference to the Text Mesh Pro (TMP) text component for the cards left.
+        /// Reference to the Text Mesh Pro (TMP) text component for the cards left in hand.
         /// </summary>
         public TMP_Text cardsText;
+
+        /// <summary>
+        /// Reference to the Text Mesh Pro (TMP) text component for the cards left in deck.
+        /// </summary>
+        public TMP_Text cardsInDeckText;
 
         /// <summary>
         /// Reference to the Text Mesh Pro (TMP) text component for bombs count.
@@ -70,8 +75,11 @@ namespace HUD
             // Set the initial points in the HUD
             pointsText.text = "Punkty: 0";
 
-            // Set the initial points in the HUD
-            cardsText.text = "Karty na ręce: " + DataManager.Instance.difficultyLevel.startCardsCount.ToString();;
+            // Set the initial cards in hand in the HUD
+            cardsText.text = "Karty na ręce: " + DataManager.Instance.difficultyLevel.startCardsCount.ToString();
+
+            // Set the initial cards in deck in the HUD
+            //cardsInDeckText.text = "Karty w talii: " + GameBoardController.Instance.cardList.CardCount().ToString();
 
             // Listen to the toggle's state change event
             bombsToggle.onValueChanged.AddListener(OnBombsToggleValueChanged);
@@ -81,6 +89,7 @@ namespace HUD
             GameBoardController.Instance.bombsLeft = DataManager.Instance.difficultyLevel.startBombsCount;
             GameBoardController.Instance.doubleUpsLeft = DataManager.Instance.difficultyLevel.startDoubleUpsCount;
             GameBoardController.Instance.cardsLeft = DataManager.Instance.difficultyLevel.startCardsCount;
+            //GameBoardController.Instance.cardsLeftInDeck = GameBoardController.Instance.cardList.CardCount();
             GameBoardController.Instance.points = 0;
         }
         /// <summary>
@@ -97,8 +106,11 @@ namespace HUD
             // Update the points in the HUD
             pointsText.text = "Punkty:" + GameBoardController.Instance.points.ToString();
 
-            // Update the points in the HUD
+            // Update the cards in hand in the HUD
             cardsText.text = "Karty na ręce:" + GameBoardController.Instance.cardsLeft.ToString();
+
+            // Update the cards in deck in the HUD
+            cardsInDeckText.text = "Karty w talii:" + GameBoardController.Instance.cardsLeftInDeck.ToString();
         }
 
         /// <summary>

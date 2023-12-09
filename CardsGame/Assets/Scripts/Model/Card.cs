@@ -151,5 +151,7 @@ namespace Model
     public List<Vector3> fountainLocations;// Potential locations for fountains
 
     public Sprite cardImage;
+
+    public bool isDrawed;
   }
 }

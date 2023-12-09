@@ -19,10 +19,9 @@ namespace EndMenu
         /// </summary>
         private void Start()
         {
-            if (DataManager.Instance.IsWin == true)
-                messageTextComponent.text = "Brawo! Wygrałeś";
-            else
-                messageTextComponent.text = "Niestety przegrałeś";
+
+            messageTextComponent.text = $"Koniec gry! Twoje punkty: {DataManager.Instance.points}";
+
         }
     }
 }

@@ -25,19 +25,7 @@ namespace HUD
         /// </summary>
         public void OnEndGameButtonClick()
         {
-            // Check if the player wins based on game parameters
-            foreach (var parameter in DataManager.Instance.difficultyLevel.parameters)
-            {
-                int points = PointsManager.Instance.parameters.Find(p => p.name == parameter.name).points;
-
-                if (points <= parameter.max && points >= parameter.min)
-                    DataManager.Instance.IsWin = true;
-                else
-                {
-                    DataManager.Instance.IsWin = false;
-                    break;
-                }
-            }
+            DataManager.Instance.points = GameBoardController.Instance.points;
 
             // Load a End Menu scene
             SceneManager.LoadScene(2);
