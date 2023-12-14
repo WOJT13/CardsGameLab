@@ -17,7 +17,7 @@ namespace Game
         /// <summary>
         /// Card image
         /// </summary>
-        public Image cardImgDisplay;
+        public Sprite cardImgDisplay;
 
         private void Start()
         {
@@ -72,7 +72,7 @@ namespace Game
                 var coordinates = neighboringPlane.transform.position;
                 gameBoardController.allowedNeighbourList.AddToListUnique(coordinates);
             }
-
+            gameBoardController.points += 2;
             gameBoardController.isBoardEmpty = false;
 
             QuestManager.Instance.CheckQuests(gameBoardController.cardPlacementTracker);
