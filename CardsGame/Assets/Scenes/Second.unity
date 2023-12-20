@@ -445,6 +445,11 @@ MonoBehaviour:
   points: 0
   canWalk: 0
   isBoardEmpty: 1
+  treePrefabs:
+  - {fileID: 192044, guid: 19682540d8a014522a319b1cf788aee2, type: 3}
+  - {fileID: 191266, guid: c44bd9bdc114d4a60932c0087d9d1732, type: 3}
+  - {fileID: 137650, guid: 826b6a0b570e8460990010fa615b5a2a, type: 3}
+  fountainPrefab: {fileID: 178508, guid: 8142860b8f89a564faf152e3c8b743e7, type: 3}
 --- !u!4 &141410716
 Transform:
   m_ObjectHideFlags: 0

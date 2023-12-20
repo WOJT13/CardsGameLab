@@ -64,6 +64,11 @@ namespace Game
             quests.Add(new Quest.Quest("COLOR!", "Connect 4 cards with the same color", new List<Quest.QuestRequirement>() { new Quest.FourCardsSameWithSymbolConnected() }, Quest.RewardType.Cards, 2));
             quests.Add(new Quest.Quest("Pair!", "Connect 2 cards with the same pictograph", new List<Quest.QuestRequirement>() { new Quest.TwoCardsWithTheSamePictographConnected() }, Quest.RewardType.Bombs, 2));
 
+            quests.Add(new Quest.Quest("DIAG 2", "Connect 2 cards of the same type diagonally", new List<Quest.QuestRequirement>() { new Quest.DiagonalLineOfSameType(2) }, Quest.RewardType.Score, 5));
+            quests.Add(new Quest.Quest("DIAG 4", "Connect 2 cards of the same type diagonally", new List<Quest.QuestRequirement>() { new Quest.DiagonalLineOfSameType(4) }, Quest.RewardType.Score, 20));
+
+            quests.Add(new Quest.Quest("Rainbow!", "Place one card of each color in a row or column.", new List<Quest.QuestRequirement>() { new Quest.FourCardsOfEachColorInRowOrColumn() }, Quest.RewardType.Score, 30));
+
             availableQuests.Add(quests[UnityEngine.Random.Range(0, quests.Count)]);
             availableQuests.Add(quests[UnityEngine.Random.Range(0, quests.Count)]);
             availableQuests.Add(quests[UnityEngine.Random.Range(0, quests.Count)]);
@@ -112,7 +117,7 @@ namespace Game
                     var gameBoardController = GameBoardController.Instance;
                     if (gameBoardController == null) return;
 
-                    if(gameBoardController.canDoublePoints && gameBoardController.doubleUpsLeft > 0)
+                    if (gameBoardController.canDoublePoints && gameBoardController.doubleUpsLeft > 0)
                     {
                         rewardAmount *= 2;
                         gameBoardController.doubleUpsLeft--;
@@ -122,11 +127,11 @@ namespace Game
                     break;
                 }
                 case RewardType.Cards:
-                {  
+                {
                     var gameBoardController = GameBoardController.Instance;
                     if (gameBoardController == null) return;
 
-                    for(int i=0; i < rewardAmount; i++)
+                    for (int i = 0; i < rewardAmount; i++)
                     {
                         var drawedCard = gameBoardController.cardList.DrawCard();
                         gameBoardController.hand.Create(drawedCard);
@@ -181,7 +186,7 @@ namespace Game
                     return $"Punkty: {rewardAmount}";
                 }
                 case RewardType.Cards:
-                {  
+                {
                     return $"Karty: {rewardAmount}";
                 }
                 case RewardType.Bombs:

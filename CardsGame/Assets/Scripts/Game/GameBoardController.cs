@@ -70,7 +70,7 @@ namespace Game
         /// </summary>
         public int cardsLeft;
 
-         /// <summary>
+        /// <summary>
         /// The number of cards left in deck.
         /// </summary>
         public int cardsLeftInDeck;
@@ -89,6 +89,18 @@ namespace Game
         /// Information about first building on grid
         /// </summary>
         public bool isBoardEmpty = true;
+
+        /// <summary>
+        /// Prefabs of a different trees.
+        /// </summary>
+        public List<GameObject> treePrefabs;
+
+        /// <summary>
+        /// Prefab of a fountain.
+        /// </summary>
+        public GameObject fountainPrefab;
+
+
 
         /// <summary>
         /// Method for instantiating controller
@@ -173,7 +185,7 @@ namespace Game
             {
                 var planes = FindAdjacentPlanes(building.Key);
 
-                foreach(var neighboringPlane in planes)
+                foreach (var neighboringPlane in planes)
                 {
                     neighboringPlane.ChangeColor(Color.blue);
                     neighboringPlane.isAvailable = true;
@@ -182,7 +194,6 @@ namespace Game
                 }
             }
             allowedNeighbourList = newNeighbourhood;
-
         }
     }
 }

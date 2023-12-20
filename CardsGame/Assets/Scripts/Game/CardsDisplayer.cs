@@ -63,6 +63,10 @@ namespace Game
             gameBoardController.ChangePlaneStatusToOccupied(selectedPlanePosition);
             gameBoardController.cardPlacementTracker.Add(selectedPlanePosition, card);
 
+            var buildingController = newBuilding.GetComponent<BuildingController>();
+            buildingController.coordinates = selectedPlanePosition;
+            PlaceTreesAndFountains(card, selectedPlanePosition, buildingController, gameBoardController);
+
             var planes = gameBoardController.FindAdjacentPlanes(selectedPlanePosition);
 
             foreach (var neighboringPlane in planes)
@@ -79,7 +83,36 @@ namespace Game
             Destroy(gameObject);
             gameBoardController.hand.Remove(card.cardID);
             gameBoardController.cardsLeft = gameBoardController.hand.CardCount();
+        }
 
+        /// <summary>
+        /// Places trees and fountains on the card.
+        /// </summary>
+        /// <param name="card">The card to place trees and fountains on.</param>
+        /// <param name="buildingPosition">The position of the building.</param>
+        /// <param name="buildingController">The building controller.</param>
+        /// <param name="gameBoardController">The game board controller</param>
+        private static void PlaceTreesAndFountains(Card card, Vector3 buildingPosition, BuildingController buildingController, GameBoardController gameBoardController)
+        {
+            // Randomly decide to place a fountain
+            if (Random.Range(0f, 1f) < 0.5f && card.fountainLocations.Count > 0) // Example probability, adjust as needed
+            {
+                var fountainPosition = card.fountainLocations[Random.Range(0, card.fountainLocations.Count)];
+                var fountainRotation = Quaternion.Euler(-90, 0, 0);
+                var item = Instantiate(gameBoardController.fountainPrefab, fountainPosition + buildingPosition, fountainRotation);
+                buildingController.cardObjectList.Add(item);
+            }
+
+            // Randomly decide to place trees
+            foreach (var treeLocation in card.treeLocations)
+            {
+                if (Random.Range(0f, 1f) < 0.7f) // Example probability, adjust as needed
+                {
+                    var treePrefab = gameBoardController.treePrefabs[Random.Range(0, gameBoardController.treePrefabs.Count)];
+                    var item = Instantiate(treePrefab, treeLocation + buildingPosition, Quaternion.identity);
+                    buildingController.cardObjectList.Add(item);
+                }
+            }
         }
 
 
