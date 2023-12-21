@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 
 namespace Game
 {
@@ -85,10 +86,22 @@ namespace Game
         /// <param name="cardPlacementTracker">The tracker of card placements.</param>
         public void CheckQuests(Dictionary<Vector3, Card> cardPlacementTracker)
         {
+            var gameBoardController = GameBoardController.Instance;
+
             var completedQuests = new List<Quest.Quest>(availableQuests.Where(quest => quest.IsCompleted(cardPlacementTracker)));
             foreach (var quest in completedQuests)
             {
                 GrantReward(quest.reward, quest.rewardAmount);
+
+                var drawedCard = gameBoardController.cardList.DrawCard();
+
+                GameBoardController.Instance.hand.Create(drawedCard);
+
+                var newGameObject = Instantiate(drawedCard.cardModel, CardManager.Instance.container);
+                var newCard = newGameObject.GetComponent<CardsDisplayer>();
+                var image = newGameObject.GetComponent<Image>();
+                image.sprite = drawedCard.cardImage;
+                newCard.id = drawedCard.cardID;
 
                 availableQuests.Remove(quest);
                 availableQuests.Add(quests[UnityEngine.Random.Range(0, quests.Count)]);

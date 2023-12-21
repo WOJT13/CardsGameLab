@@ -12,6 +12,11 @@ namespace Game
     public class CardManager : MonoBehaviour
     {
         /// <summary>
+        /// Get and set the singleton instance of the CardManager.
+        /// </summary>
+        public static CardManager Instance { get; private set; }
+
+        /// <summary>
         /// List of cards
         /// </summary>
         public CardsList cardsList = new CardsList();
@@ -31,6 +36,9 @@ namespace Game
         /// </summary>
         public Transform container;
 
+        /// <summary>
+        /// Sprite of the card.
+        /// </summary>
         public Sprite cardImg;
 
         /// <summary>
@@ -38,10 +46,19 @@ namespace Game
         /// </summary>
         private void Awake()
         {
+            if (Instance != null && Instance != this)
+            {
+                Destroy(gameObject);
+            }
+            else
+            {
+                Instance = this;
+            }
+
             /*Symbol[] symbols = { Symbol.Pik, Symbol.Kier, Symbol.Trefl, Symbol.Karo };
-            Pictograph[] pictographs = { Pictograph.As, Pictograph.Krol, Pictograph.Dama, Pictograph.Walet, 
-                             Pictograph.n10, Pictograph.n9, Pictograph.n8, Pictograph.n7, 
-                             Pictograph.n6, Pictograph.n5, Pictograph.n4, Pictograph.n3, 
+            Pictograph[] pictographs = { Pictograph.As, Pictograph.Krol, Pictograph.Dama, Pictograph.Walet,
+                             Pictograph.n10, Pictograph.n9, Pictograph.n8, Pictograph.n7,
+                             Pictograph.n6, Pictograph.n5, Pictograph.n4, Pictograph.n3,
                              Pictograph.n2 };
 
             int cardID = 1;
@@ -77,9 +94,11 @@ namespace Game
             }*/
 
             int cardID = 1;
-            List<string> cardsName = new List<string>() {"3_PIK", "4_KARO", "6_KIER", "7_TREFL","8_PIK","D_KIER", "K_KARO", "K_TREFL"};
-            for (int i = 0; i < 5; i++) {
-                foreach (var cardName in cardsName) {
+            List<string> cardsName = new List<string>() { "3_PIK", "4_KARO", "6_KIER", "7_TREFL", "8_PIK", "D_KIER", "K_KARO", "K_TREFL" };
+            for (int i = 0; i < 5; i++)
+            {
+                foreach (var cardName in cardsName)
+                {
                     var Card1 = new Card
                     {
                         cardID = cardID++,
@@ -105,12 +124,12 @@ namespace Game
             }
             GameBoardController.Instance.cardList = cardsList;
             GameBoardController.Instance.hand = new CardsList();
-            for(int i=0; i < DataManager.Instance.difficultyLevel.startCardsCount; i++)
+            for (int i = 0; i < DataManager.Instance.difficultyLevel.startCardsCount; i++)
             {
                 var drawedCard = cardsList.DrawCard();
-                
+
                 GameBoardController.Instance.hand.Create(drawedCard);
-                
+
                 var newGameObject = Instantiate(drawedCard.cardModel, container);
                 var newCard = newGameObject.GetComponent<CardsDisplayer>();
                 var image = newGameObject.GetComponent<Image>();
@@ -120,7 +139,6 @@ namespace Game
             }
 
             GameBoardController.Instance.cardsLeftInDeck = cardsList.CardCount() - DataManager.Instance.difficultyLevel.startCardsCount;
-            
         }
 
         private void Update()
@@ -129,14 +147,14 @@ namespace Game
             {
                 DataManager.Instance.points = GameBoardController.Instance.points;
                 SceneManager.LoadScene(2);
-            }    
+            }
         }
 
         private Pictograph MapPictogtaph(string name)
         {
             var symbol = name[0];
 
-            switch(symbol)
+            switch (symbol)
             {
                 case ('3'):
                     return Pictograph.n3;
