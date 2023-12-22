@@ -49,8 +49,10 @@ namespace Quest
 
                 if (tracker.TryGetValue(nextPosition, out var nextCard) && !symbolList.Contains(nextCard.symbol))
                 {
+                    Debug.Log($"nextCard.symbol: {nextCard.symbol}");
                     matchingCount++;
                     symbolList.Add(nextCard.symbol);
+                    Debug.Log($"symbolList.Count: {symbolList.Count}");
                 }
                 else
                 {
@@ -82,8 +84,10 @@ namespace Quest
 
                 if (tracker.TryGetValue(nextPosition, out var nextCard) && !symbolList.Contains(nextCard.symbol))
                 {
+                    Debug.Log($"nextCard.symbol: {nextCard.symbol}");
                     matchingCount++;
                     symbolList.Add(nextCard.symbol);
+                    Debug.Log($"symbolList.Count: {symbolList.Count}");
                 }
                 else
                 {

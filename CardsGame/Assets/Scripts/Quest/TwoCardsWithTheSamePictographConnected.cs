@@ -29,7 +29,7 @@ namespace Quest
             {
                 var visited = new HashSet<Vector3>
                 {
-                    item.Key
+                    //item.Key
                 };
                 if (DfsForPictograph(item.Key, item.Value.pictograph, cardPlacementTracker, visited))
                 {
@@ -49,18 +49,20 @@ namespace Quest
         /// <returns>True if the pictograph is found, false otherwise.</returns>
         private static bool DfsForPictograph(Vector3 position, Pictograph pictograph, IReadOnlyDictionary<Vector3, Card> tracker, HashSet<Vector3> visited)
         {
+            Debug.Log($"pictograph: {pictograph}");
+            Debug.Log($"visited.Contains(position): {visited.Contains(position)}");
             if (!tracker.TryGetValue(position, out Card card) || visited.Contains(position))
             {
                 return false;
             }
 
-            visited.Add(position);
+            
 
-            if (card.pictograph == pictograph)
+            if (card.pictograph == pictograph && !visited.Contains(position))
             {
                 return true; // Found a matching pictograph
             }
-
+            visited.Add(position);
             // Check adjacent positions (up, down, left, right)
             var adjacentPositions = new Vector3[]
             {

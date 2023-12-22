@@ -66,7 +66,7 @@ namespace Game
             quests.Add(new Quest.Quest("Pair!", "Connect 2 cards with the same pictograph", new List<Quest.QuestRequirement>() { new Quest.TwoCardsWithTheSamePictographConnected() }, Quest.RewardType.Bombs, 2));
 
             quests.Add(new Quest.Quest("DIAG 2", "Connect 2 cards of the same type diagonally", new List<Quest.QuestRequirement>() { new Quest.DiagonalLineOfSameType(2) }, Quest.RewardType.Score, 5));
-            quests.Add(new Quest.Quest("DIAG 4", "Connect 2 cards of the same type diagonally", new List<Quest.QuestRequirement>() { new Quest.DiagonalLineOfSameType(4) }, Quest.RewardType.Score, 20));
+            quests.Add(new Quest.Quest("DIAG 4", "Connect 4 cards of the same type diagonally", new List<Quest.QuestRequirement>() { new Quest.DiagonalLineOfSameType(4) }, Quest.RewardType.Score, 20));
 
             quests.Add(new Quest.Quest("Rainbow!", "Place one card of each color in a row or column.", new List<Quest.QuestRequirement>() { new Quest.FourCardsOfEachColorInRowOrColumn() }, Quest.RewardType.Score, 30));
 

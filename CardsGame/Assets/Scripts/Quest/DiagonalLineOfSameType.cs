@@ -60,6 +60,7 @@ namespace Quest
 
                 if (!tracker.TryGetValue(nextPosition, out var nextCard) || nextCard.symbol != symbol)
                 {
+                    Debug.Log($"matchingCount: {matchingCount}");
                     return false;
                 }
 
