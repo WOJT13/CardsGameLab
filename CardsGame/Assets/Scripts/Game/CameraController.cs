@@ -3,57 +3,44 @@
 namespace Game
 {
     /// <summary>
-    /// Controls the camera's movement and rotation based on player input.
+    /// Controls the camera's movement based on player input.
     /// </summary>
     public class CameraController : MonoBehaviour
-    {/*
+    {
         /// <summary>
-        /// The speed at which the camera moves.
+        /// Flag informed about mouse dragging
         /// </summary>
-        public float moveSpeed = 550.0f;
-
-        /// <summary>
-        /// The speed at which the camera rotates.
-        /// </summary>
-        public float rotationSpeed = 15.0f;
-
-        /// <summary>
-        /// Update is called once per frame to handle camera movement and rotation.
-        /// </summary>
-        private void Update()
-        {
-            //if (!GameBoardController.Instance.canWalk) return;
-
-            var horizontalInput = Input.GetAxis("Horizontal");
-            var verticalInput = Input.GetAxis("Vertical");
-
-            var moveDirection = new Vector3(horizontalInput, 0, verticalInput);
-            transform.Translate(moveDirection * (moveSpeed * Time.deltaTime));
-
-            if (Input.GetKey(KeyCode.Q))
-            {
-                transform.Rotate(Vector3.up, -rotationSpeed * Time.deltaTime);
-            }
-            if (Input.GetKey(KeyCode.E))
-            {
-                transform.Rotate(Vector3.up, rotationSpeed * Time.deltaTime);
-            }
-        }*/
-
         private bool isDragging = false;
+
+        /// <summary>
+        /// Start camera position
+        /// </summary>
         private Vector3 dragStartPosition;
 
-        // Ograniczenia kamery
+        /// <summary>
+        /// Minimal X value in camera positon
+        /// </summary>
         public float minX = 0f;
+        /// <summary>
+        /// Maximal X value in camera position
+        /// </summary>
         public float maxX = 120f;
+        /// <summary>
+        /// Minimal Y vaue in camera position
+        /// </summary>
         public float minY = 15f;
+        /// <summary>
+        /// Maximal Y value in camera position
+        /// </summary>
         public float maxY = 40f;
 
         void Update()
         {
             HandleMouseInput();
         }
-
+        /// <summary>
+        /// Method allows move camera using mouse dragging
+        /// </summary>
         void HandleMouseInput()
         {
             if (Input.GetMouseButtonDown(0))

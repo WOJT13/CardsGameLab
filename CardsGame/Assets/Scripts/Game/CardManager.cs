@@ -55,44 +55,6 @@ namespace Game
                 Instance = this;
             }
 
-            /*Symbol[] symbols = { Symbol.Pik, Symbol.Kier, Symbol.Trefl, Symbol.Karo };
-            Pictograph[] pictographs = { Pictograph.As, Pictograph.Krol, Pictograph.Dama, Pictograph.Walet,
-                             Pictograph.n10, Pictograph.n9, Pictograph.n8, Pictograph.n7,
-                             Pictograph.n6, Pictograph.n5, Pictograph.n4, Pictograph.n3,
-                             Pictograph.n2 };
-
-            int cardID = 1;
-            foreach (Symbol symbol in symbols)
-            {
-                foreach (Pictograph pictograph in pictographs)
-                {
-                    // Create a new card with the current symbol and pictograph
-                    var newCard = new Card
-                    {
-                        cardID = cardID++,
-                        symbol = symbol,
-                        pictograph = pictograph,
-                        buildingModel = building,
-                        cardModel = card,
-                        treeLocations = new List<Vector3>
-                        {
-                            new Vector3(-3, 0, -3), // Corner 1
-                            new Vector3(3, 0, -3), // Corner 2
-                            new Vector3(-3, 0, 3), // Corner 3
-                            //new Vector3(3, 0, 3) // Corner 4
-                        },
-                        fountainLocations = new List<Vector3>
-                        {
-                            new Vector3(3, 0, 3) // Corner 4
-                        },
-                        cardImage = cardImg,
-                    };
-
-                    // Add the new card to the list
-                    cardsList.Create(newCard);
-                }
-            }*/
-
             int cardID = 1;
             List<string> cardsName = new List<string>() { "3_PIK", "4_KARO", "6_KIER", "7_TREFL", "8_PIK", "D_KIER", "K_KARO", "K_TREFL" };
             for (int i = 0; i < 5; i++)

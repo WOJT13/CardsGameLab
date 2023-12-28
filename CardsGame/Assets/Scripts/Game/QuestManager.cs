@@ -58,17 +58,17 @@ namespace Game
                 Instance = this;
             }
 
-            quests.Add(new Quest.Quest("COLOR!", "Connect 4 cards with the same color", new List<Quest.QuestRequirement>() { new Quest.FourCardsSameWithSymbolConnected() }, Quest.RewardType.Score, 5));
-            quests.Add(new Quest.Quest("Pair!", "Connect 2 cards with the same pictograph", new List<Quest.QuestRequirement>() { new Quest.TwoCardsWithTheSamePictographConnected() }, Quest.RewardType.Score, 5));
+            quests.Add(new Quest.Quest("KOLOR!", "Po³¹cz 4 karty tego samego koloru", new List<Quest.QuestRequirement>() { new Quest.FourCardsSameWithSymbolConnected() }, Quest.RewardType.Score, 5));
+            quests.Add(new Quest.Quest("PARA!", "Po³¹cz 2 karty z tym samym piktografem", new List<Quest.QuestRequirement>() { new Quest.TwoCardsWithTheSamePictographConnected() }, Quest.RewardType.Score, 5));
 
-            quests.Add(new Quest.Quest("COLOR!", "Connect 4 cards with the same color", new List<Quest.QuestRequirement>() { new Quest.FourCardsSameWithSymbolConnected() }, Quest.RewardType.Bombs, 2));
-            quests.Add(new Quest.Quest("COLOR!", "Connect 4 cards with the same color", new List<Quest.QuestRequirement>() { new Quest.FourCardsSameWithSymbolConnected() }, Quest.RewardType.Cards, 2));
-            quests.Add(new Quest.Quest("Pair!", "Connect 2 cards with the same pictograph", new List<Quest.QuestRequirement>() { new Quest.TwoCardsWithTheSamePictographConnected() }, Quest.RewardType.Bombs, 2));
+            quests.Add(new Quest.Quest("KOLOR!", "Po³¹cz 4 karty tego samego koloru", new List<Quest.QuestRequirement>() { new Quest.FourCardsSameWithSymbolConnected() }, Quest.RewardType.Bombs, 2));
+            quests.Add(new Quest.Quest("KOLOR!", "Po³¹cz 4 karty tego samego koloru", new List<Quest.QuestRequirement>() { new Quest.FourCardsSameWithSymbolConnected() }, Quest.RewardType.Cards, 2));
+            quests.Add(new Quest.Quest("PARA!", "Po³¹cz 2 karty z tym samym piktografem", new List<Quest.QuestRequirement>() { new Quest.TwoCardsWithTheSamePictographConnected() }, Quest.RewardType.Bombs, 2));
 
-            quests.Add(new Quest.Quest("DIAG 2", "Connect 2 cards of the same type diagonally", new List<Quest.QuestRequirement>() { new Quest.DiagonalLineOfSameType(2) }, Quest.RewardType.Score, 5));
-            quests.Add(new Quest.Quest("DIAG 4", "Connect 4 cards of the same type diagonally", new List<Quest.QuestRequirement>() { new Quest.DiagonalLineOfSameType(4) }, Quest.RewardType.Score, 20));
+            quests.Add(new Quest.Quest("SKOS 2", "Po³¹cz 2 karty tego samego typu pod skosem", new List<Quest.QuestRequirement>() { new Quest.DiagonalLineOfSameType(2) }, Quest.RewardType.Score, 5));
+            quests.Add(new Quest.Quest("SKOS 4", "Po³¹cz 4 karty tego samego typu pod skosem", new List<Quest.QuestRequirement>() { new Quest.DiagonalLineOfSameType(4) }, Quest.RewardType.Score, 20));
 
-            quests.Add(new Quest.Quest("Rainbow!", "Place one card of each color in a row or column.", new List<Quest.QuestRequirement>() { new Quest.FourCardsOfEachColorInRowOrColumn() }, Quest.RewardType.Score, 30));
+            quests.Add(new Quest.Quest("TÊCZA!", "Po³ó¿ kartê ka¿dego koloru w wierszu lub kolumnie", new List<Quest.QuestRequirement>() { new Quest.FourCardsOfEachColorInRowOrColumn() }, Quest.RewardType.Score, 30));
 
             availableQuests.Add(quests[UnityEngine.Random.Range(0, quests.Count)]);
             availableQuests.Add(quests[UnityEngine.Random.Range(0, quests.Count)]);

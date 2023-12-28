@@ -19,28 +19,6 @@ namespace Game
         /// </summary>
         public Sprite cardImgDisplay;
 
-        private void Start()
-        {
-            //Display();
-        }
-
-        /// <summary>
-        /// Method display card
-        /// </summary>
-        /// <param name="cardIndex"></param>
-        public void Display()
-        {
-            /*GameBoardController.Instance.hand = new CardsList();
-
-            for(int i=0; i < DataManager.Instance.difficultyLevel.startCardsCount; i++)
-            {
-                Debug.Log(i);
-                var drawedCard = GameBoardController.Instance.cardList.GetAll()[UnityEngine.Random.Range(0, DataManager.Instance.difficultyLevel.startCardsCount)];
-                GameBoardController.Instance.hand.Create(drawedCard);
-                Instantiate(drawedCard.cardModel, container);
-            }*/
-        }
-
         /// <summary>
         /// Method used for click on card
         /// </summary>
